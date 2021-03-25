@@ -26,6 +26,15 @@ Generate a backend and frontend stack using Python, including interactive API do
 
 `Create and activate a virtual environment`
 
+`Config Vars`
+- MONGODB_URI
+- GOOGLE_CREDENTIALS
+- GOOGLE_APPLICATION_CREDENTIALS
+
+`add vuildpack`
+- heroku/python
+- https://github.com/elishaterada/heroku-google-application-credentials-buildpack
+
 ~~~~
 $ python3 -m venv venv && source venv/bin/activate
  ~~~~        

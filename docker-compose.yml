@@ -1,0 +1,9 @@
+version: '2'
+services:
+  core_api:
+    build: .
+    container_name: "PokerCard"
+    ports:
+      - "5000:5000"
+    volumes:
+      - .

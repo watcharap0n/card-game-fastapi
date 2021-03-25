@@ -1,0 +1,7 @@
+node_modules
+.gitattributes
+package-lock.json
+__pycache__
+.idea
+venv
+config

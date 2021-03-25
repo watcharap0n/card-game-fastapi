@@ -1,4 +1,3 @@
-
 # Game-Card - Full Stack FastAPI and Vue.js - MongoDB Deploy Heroku
 
 ****
@@ -27,11 +26,13 @@ Generate a backend and frontend stack using Python, including interactive API do
 `Create and activate a virtual environment`
 
 `Config Vars`
+
 - MONGODB_URI
 - GOOGLE_CREDENTIALS
 - GOOGLE_APPLICATION_CREDENTIALS
 
 `add vuildpack`
+
 - heroku/python
 - https://github.com/elishaterada/heroku-google-application-credentials-buildpack
 
@@ -61,4 +62,15 @@ Python app.py
 
 ~~~~
 sudo mongod --dbpath /usr/local/var/mongodb
+ ~~~~
+
+`Deploy Heroku`
+
+~~~~
+$ heroku login
+$ heroku git:clone -a game-card-watcharapon
+$ cd game-card-watcharapono
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
  ~~~~

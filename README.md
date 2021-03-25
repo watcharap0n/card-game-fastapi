@@ -6,8 +6,7 @@
 Generate a backend and frontend stack using Python, including interactive API documentation.
 
 **Interactive API documentation**
-
-![alt text](https://sv1.picz.in.th/images/2021/03/26/D6torg.png)
+![Alt text](https://sv1.picz.in.th/images/2021/03/26/D6torg.png?raw=true "Title")
 
 **Feature**
 

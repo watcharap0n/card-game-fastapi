@@ -101,12 +101,12 @@ async def register(
         password: str = Form(...),
         username: str = Form(...),
 ):
-    host = request.url.hostname
-    scheme = request.url.scheme
+    # host = request.url.hostname
+    # scheme = request.url.scheme
     uploads_dir = os.path.join('static', 'uploads')
     file_input = os.path.join(uploads_dir, file.filename)
-    # https_dir = os.path.join(f'https://linebot-kane.herokuapp.com', file_input)
-    https_dir = os.path.join(f'{scheme}//:{host}', file_input)
+    https_dir = os.path.join(f'https://game-card-watcharapon.herokuapp.com', file_input)
+    # https_dir = os.path.join(f'{scheme}//:{host}', file_input)
     user = auth.create_user(
         email=email,
         password=password,

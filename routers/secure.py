@@ -167,7 +167,7 @@ async def clean_session(response: Response, request: Request):
     try:
         decoded_claims = auth.verify_session_cookie(token, check_revoked=True)
         auth.revoke_refresh_tokens(decoded_claims['sub'])
-        response.set_cookie('access-token', expires=0)
+        response.set_cookie('access-token', value='logout', expires=0)
         return RedirectResponse(url='/root_login')
     except auth.RevokedSessionCookieError:
         return RedirectResponse(url='/root_login')

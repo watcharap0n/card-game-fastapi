@@ -3,69 +3,68 @@
   <br>
   <br>
   <div id="app">
-    <v-container>
-      <v-row>
-        <v-col cols="3">
-          <div class="text-center">
-            <v-avatar>
-              <img
-                  :src="auth.picture"
-                  alt="attr"
+    <v-app id="inspire">
+      <v-container>
+        <v-row>
+          <v-col cols="3">
+            <div class="text-center">
+              <v-avatar>
+                <img
+                    :src="auth.picture"
+                    alt="attr"
+                >
+              </v-avatar>
+              <h4>[[auth.name]]</h4>
+              <p>Click: [[count]]</p>
+              <p>My Best: [[my_best]]</p>
+              <p>Global Best: [[global_best]]</p>
+
+              <v-btn
+                  color="primary"
+                  :loading="!spinBtn"
+                  @click="getData"
               >
-            </v-avatar>
-            <h4>[[auth.name]]</h4>
-            <p>Click: [[count]]</p>
-            <p>My Best: [[my_best]]</p>
-            <p>Global Best: [[global_best]]</p>
+                NewGame
+              </v-btn>
 
-          </div>
 
-        </v-col>
-        <v-col cols="9">
-          <v-row
-          >
-            <v-col
-                v-for="(card, objKey) in memoryCards"
-                :key="card"
-                cols="12"
-                md="3"
-                class="col-auto mb-5 flip-container"
-                :class="{ 'flipped': card.flipped, 'matched' : card.matching }"
+            </div>
+
+          </v-col>
+          <v-col cols="9">
+            <v-row
             >
-              Card: [[objKey + 1]]
-              <div class="front border rounded shadow" @click="flipCard(card)">
-                <img width="180" height="220"
-                     src="/static/images/card%20back%20orange.png">
-              </div>
-              <div class="back rounded border">
-                <img width="200" height="220" :src="'/static/images/'+card.img">
-              </div>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-      {#      <v-row justify="space-around">#}
-      {#        <div class="row justify-content-md-center">#}
-      {#          <div v-for="card in memoryCards" class="col-auto mb-3 flip-container"#}
-      {#               :class="{ 'flipped': card.isFlipped, 'matched' : card.isMatched }"#}
-      {#               @click="flipCard(card)">#}
-      {#            <div class="memorycard">#}
-      {#              <div class="front border rounded shadow"><img width="100" height="150"#}
-      {#                                                            src="/static/images/card%20back%20orange.png"></div>#}
-      {#              <div class="back rounded border"><img width="100" height="150" :src="'/static/images/'+card.img">#}
-      {#              </div>#}
-      {#            </div>#}
-      {#          </div>#}
-      {#        </div>#}
-      {#      </v-row>#}
-    </v-container>
+              <v-col
+                  v-for="(card, objKey) in memoryCards"
+                  :key="card"
+                  cols="12"
+                  md="3"
+                  class="col-auto mb-5 flip-container"
+                  :class="{ 'flipped': card.flipped, 'matched' : card.matching }"
+              >
+                Card: [[objKey + 1]]
+                <div class="front border rounded shadow" @click="flipCard(card)">
+                  <img width="180" height="220"
+                       src="/static/images/card%20back%20orange.png">
+                </div>
+                <div class="back rounded border">
+                  <img width="200" height="220" :src="'/static/images/'+card.img">
+                </div>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-app>
   </div>
 
 
   <script>
-      let app = new Vue({
+      new Vue({
           el: '#app',
+          vuetify: new Vuetify(),
           data: {
+              spinBtn: false,
               count: 0,
               global_best: 0,
               global_user: '',
@@ -85,35 +84,37 @@
               });
           },
           created() {
-              this.getSocket();
-              const path = '/secure/socket_auth';
-              axios.get(path)
-                  .then((res) => {
-                      this.auth = res.data;
-                      const path = `/card/create_card/${this.auth.name}`;
-                      axios.get(path)
-                          .then((res) => {
-                              this.my_best = res.data.my_best
-                              this.cards = res.data.cards;
-                              this.global_best = res.data.best;
-                              this.cards.forEach((card) => {
-                                  Vue.set(card, 'flipped', false);
-                                  Vue.set(card, 'matching', false);
-                              });
-                              this.memoryCards = _.shuffle(this.memoryCards.concat(_.cloneDeep(this.cards), _.cloneDeep(this.cards)));
-                          })
-                          .catch((err) => {
-                              console.error(err);
-                          })
-                      console.log(false);
-                  })
-                  .catch((err) => {
-                      console.error(err);
-                  })
+              this.getData();
           },
           methods: {
-              getSocket() {
-
+              getData() {
+                  this.count = 0;
+                  const path = '/secure/socket_auth';
+                  this.spinBtn = true;
+                  axios.get(path)
+                      .then((res) => {
+                          this.auth = res.data;
+                          const path = `/card/create_card/${this.auth.name}`;
+                          axios.get(path)
+                              .then((res) => {
+                                  this.my_best = res.data.my_best
+                                  this.cards = res.data.cards;
+                                  this.global_best = res.data.best;
+                                  this.cards.forEach((card) => {
+                                      Vue.set(card, 'flipped', false);
+                                      Vue.set(card, 'matching', false);
+                                  });
+                                  this.memoryCards = []
+                                  this.memoryCards = _.shuffle(this.memoryCards.concat(_.cloneDeep(this.cards), _.cloneDeep(this.cards)));
+                              })
+                              .catch((err) => {
+                                  console.error(err);
+                              })
+                          console.log(false);
+                      })
+                      .catch((err) => {
+                          console.error(err);
+                      })
               },
               flipCard(card) {
                   console.log(card)
@@ -178,6 +179,9 @@
                       .catch((err) => {
                           console.error(err)
                       })
+              },
+              logout() {
+                  window.location = '/secure/logout';
               }
 
           },

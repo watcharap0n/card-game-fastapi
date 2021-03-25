@@ -53,14 +53,17 @@ async def create_card(
     db.insert_one(collection=collection, data=created)
     user = db.find(collection=collection, query={'username': name})[1:]
     user = [u['num'] for u in user]
-    user = min(i for i in user if i >= 12)
-
-    best_user = db.find(collection='award', query={})[1:]
-    best_user = [i['best'] for i in best_user]
-    score = min(i for i in best_user if i >= 12)
+    user = [i for i in user if i >= 12]
+    if user:
+        best_user = db.find(collection='award', query={})[1:]
+        best_user = [i['best'] for i in best_user]
+        score = min(i for i in best_user if i >= 12)
+        response.set_cookie(key='id_card', value=Id, expires=60 * 20)
+        del created['_id']
+        return {'cards': created['cards'], 'my_best': min(user), 'best': score}
     response.set_cookie(key='id_card', value=Id, expires=60 * 20)
     del created['_id']
-    return {'cards': created['cards'], 'my_best': user, 'best': score}
+    return {'cards': created['cards'], 'my_best': 0, 'best': 0}
     # return {'cards': created['cards'], }
 
 

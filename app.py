@@ -47,17 +47,22 @@ async def add_process_time_header(request: Request, call_next):
 
 
 @app.get('/')
-@app.get('/root_login')
+@app.get('/root_login', tags=['Page'])
 async def root_login(request: Request):
     return template.TemplateResponse('login.vue', context={'request': request})
 
 
-@app.get('/root_register')
+@app.get('/root_register', tags=['Page'])
 async def root_login(request: Request):
     return template.TemplateResponse('register.vue', context={'request': request})
 
 
-@app.get('/card')
+@app.get('/root_resetpassword', tags=['Page'])
+async def root_reset(request: Request):
+    return template.TemplateResponse('reset_password.vue', context={'request': request})
+
+
+@app.get('/card', tags=['Page'])
 async def card(request: Request):
     token = request.cookies.get('access-token')
     if not token:

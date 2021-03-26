@@ -19,7 +19,7 @@ Generate a backend and frontend stack using Python, including interactive API do
         - Many other features including automatic validation, serialization, interactive documentation, authentication with OAuth2 JWT tokens, etc.
     - Firebase Authentication
     - WebSocket Pusher
-    - Vue frontend Generated with Vue CDN
+    - Vue frontend Generated with Vue CDN and Vuetify
     - Database MongoDB
     - Docker Compose Local
 

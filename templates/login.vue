@@ -101,7 +101,9 @@
                           Dont' have an account? <a href="/root_register">Sign In</a>
                         </p>
                         <p>
-                          Forgot Password
+                          <a href="/root_resetpassword">
+                            Forgot Password ?
+                          </a>
                         </p>
                       </div>
                     </v-form>

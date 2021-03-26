@@ -5,7 +5,7 @@
 Generate a backend and frontend stack using Python, including interactive API documentation.
 
 **Interactive API documentation**
-![Alt text](https://sv1.picz.in.th/images/2021/03/26/D6torg.png?raw=true "Title")
+![Alt text](https://github.com/watcharap0n/game-card/blob/main/static/Screen%20Shot%202564-03-26%20at%2001.25.57.png?raw=true "Title")
 
 **Feature**
 

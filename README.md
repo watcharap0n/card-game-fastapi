@@ -31,7 +31,7 @@ Generate a backend and frontend stack using Python, including interactive API do
 - GOOGLE_CREDENTIALS
 - GOOGLE_APPLICATION_CREDENTIALS
 
-`add vuildpack`
+`add buildpack`
 
 - heroku/python
 - https://github.com/elishaterada/heroku-google-application-credentials-buildpack

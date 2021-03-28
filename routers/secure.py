@@ -62,9 +62,8 @@ class Config_firebase:
         firebase_admin.initialize_app(self.path_auth)
 
     def authentication(self):
-        with open(self.path_db, encoding='utf8') as file_json:
-            firebase = json.load(file_json)
-            pb = pyrebase.initialize_app(firebase).auth()
+        firebase = self.path_db
+        pb = pyrebase.initialize_app(firebase).auth()
         return pb
 
 

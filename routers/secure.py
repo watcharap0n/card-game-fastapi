@@ -6,7 +6,6 @@ from datetime import timedelta
 from firebase_admin import credentials
 from db import MongoDB
 import firebase_admin
-import json
 import os
 from pusher import Pusher
 import pyrebase

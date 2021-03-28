@@ -18,7 +18,7 @@ SECRET = 'watcharaponweeraborirak'
 manager = LoginManager(SECRET, tokenUrl='/secure/login', use_cookie=True)
 
 var_authentication = os.environ.get
-var_mongodb = os.environ.get('MONGODB_URI')
+var_mongodb = os.environ['MONGODB_URI']
 db = MongoDB(database_name='Poker', uri=var_mongodb)
 # db = MongoDB(database_name='Poker', uri='mongodb://127.0.0.1:27017')
 
@@ -31,27 +31,27 @@ pusher_client = Pusher(
 )
 
 set_firebase = {
-    "apiKey": os.environ.get('apiKey'),
-    "authDomain": os.environ.get('authDomain'),
-    "projectId": os.environ.get('projectId'),
-    "databaseURL": os.environ.get('databaseURL'),
-    "storageBucket": os.environ.get('storageBucket'),
-    "messagingSenderId": os.environ.get('messagingSenderId'),
-    "appId": os.environ.get('appId'),
-    "measurementId": os.environ.get('measurementId')
+    "apiKey": os.environ['apiKey'],
+    "authDomain": os.environ['authDomain'],
+    "projectId": os.environ['projectId'],
+    "databaseURL": os.environ['databaseURL'],
+    "storageBucket": os.environ['storageBucket'],
+    "messagingSenderId": os.environ['messagingSenderId'],
+    "appId": os.environ['appId'],
+    "measurementId": os.environ['measurementId']
 }
 
 set_authentication = {
-    "type": os.environ.get('type'),
-    "project_id": os.environ.get('project_id'),
-    "private_key_id": os.environ.get('private_key_id'),
-    "private_key": os.environ.get('private_key'),
-    "client_email": os.environ.get('client_email'),
-    "client_id": os.environ.get('client_id'),
-    "auth_uri": os.environ.get('auth_uri'),
-    "token_uri": os.environ.get('token_uri'),
-    "auth_provider_x509_cert_url": os.environ.get('auth_provider_x509_cert_url'),
-    "client_x509_cert_url": os.environ.get('client_x509_cert_url')
+    "type": os.environ['type'],
+    "project_id": os.environ['project_id'],
+    "private_key_id": os.environ['private_key_id'],
+    "private_key": os.environ['private_key'].replace("\\n", "\n"),
+    "client_email": os.environ['client_email'],
+    "client_id": os.environ['client_id'],
+    "auth_uri": os.environ['auth_uri'],
+    "token_uri": os.environ['token_uri'],
+    "auth_provider_x509_cert_url": os.environ['auth_provider_x509_cert_url'],
+    "client_x509_cert_url": os.environ['client_x509_cert_url']
 }
 
 

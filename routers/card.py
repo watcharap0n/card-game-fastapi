@@ -6,14 +6,14 @@ from bson import ObjectId
 from random import sample
 from object_str import Foo
 from typing import Optional
+import os
 
 router = APIRouter()
+
+
 # db = MongoDB(database_name='Poker', uri='mongodb://127.0.0.1:27017')
-db = MongoDB(database_name='Poker',
-             uri='mongodb://s5919410022:0834482040@cluster0-shard-00-00.hhtgp.mongodb.net:27017,'
-                 'cluster0-shard-00-01.hhtgp.mongodb.net:27017,'
-                 'cluster0-shard-00-02.hhtgp.mongodb.net:27017/line_bot?ssl=true&replicaSet=Cluster0-shard-0'
-                 '&authSource=admin&retryWrites=true&w=majority')
+var_mongodb = os.environ.get('MONGODB_URI')
+db = MongoDB(database_name='Poker', uri=var_mongodb)
 collection = 'create_card'
 
 
@@ -84,7 +84,6 @@ async def card_id(
 async def flippedCard(
         payload: Optional[dict] = Body(None)
 ):
-
     update_one_list(id=payload['id'], index=payload['index'], boolean=payload['query'])
     card = db.find_one(collection=collection, query={'card_id': payload['id']})
     iterate = [x['matching'] for x in card['cards']]

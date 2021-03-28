@@ -17,12 +17,9 @@ router = APIRouter()
 SECRET = 'watcharaponweeraborirak'
 manager = LoginManager(SECRET, tokenUrl='/secure/login', use_cookie=True)
 
-db = MongoDB(database_name='Poker',
-             uri='mongodb://s5919410022:0834482040@cluster0-shard-00-00.hhtgp.mongodb.net:27017,'
-                 'cluster0-shard-00-01.hhtgp.mongodb.net:27017,'
-                 'cluster0-shard-00-02.hhtgp.mongodb.net:27017/line_bot?ssl=true&replicaSet=Cluster0-shard-0'
-                 '&authSource=admin&retryWrites=true&w=majority')
-
+var_authentication = os.environ.get
+var_mongodb = os.environ.get('MONGODB_URI')
+db = MongoDB(database_name='Poker', uri=var_mongodb)
 # db = MongoDB(database_name='Poker', uri='mongodb://127.0.0.1:27017')
 
 pusher_client = Pusher(
@@ -32,6 +29,30 @@ pusher_client = Pusher(
     cluster='us2',
     ssl=True
 )
+
+set_firebase = {
+    "apiKey": os.environ.get('apiKey'),
+    "authDomain": os.environ.get('authDomain'),
+    "projectId": os.environ.get('projectId'),
+    "databaseURL": os.environ.get('databaseURL'),
+    "storageBucket": os.environ.get('storageBucket'),
+    "messagingSenderId": os.environ.get('messagingSenderId'),
+    "appId": os.environ.get('appId'),
+    "measurementId": os.environ.get('measurementId')
+}
+
+set_authentication = {
+    "type": os.environ.get('type'),
+    "project_id": os.environ.get('project_id'),
+    "private_key_id": os.environ.get('private_key_id'),
+    "private_key": os.environ.get('private_key'),
+    "client_email": os.environ.get('client_email'),
+    "client_id": os.environ.get('client_id'),
+    "auth_uri": os.environ.get('auth_uri'),
+    "token_uri": os.environ.get('token_uri'),
+    "auth_provider_x509_cert_url": os.environ.get('auth_provider_x509_cert_url'),
+    "client_x509_cert_url": os.environ.get('client_x509_cert_url')
+}
 
 
 class Config_firebase:
@@ -47,7 +68,7 @@ class Config_firebase:
         return pb
 
 
-config = Config_firebase(path_db='config/firebase.json', path_auth='config/authentication.json')
+config = Config_firebase(path_db=set_firebase, path_auth=set_authentication)
 pb = config.authentication()
 
 

@@ -1,4 +1,5 @@
 # Game-Card - Full Stack FastAPI and Vue.js - MongoDB Deploy Heroku
+
 **Host: https://game-card-watcharapon.herokuapp.com**
 ****
 
@@ -56,6 +57,14 @@ pip install -r requirements.txt
 
 ~~~~
 Python app.py
+ ~~~~
+
+`Setup MongoDB`
+
+~~~~
+- brew tap mongodb/brew
+- brew install mongodb-community@4.4
+- brew install --cask robo-3t
  ~~~~
 
 `Run Database`

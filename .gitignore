@@ -5,3 +5,4 @@ __pycache__
 .idea
 venv
 config
+.DS_Store
